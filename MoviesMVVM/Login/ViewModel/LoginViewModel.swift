@@ -29,7 +29,7 @@ class LoginViewModel {
     public func login(email: String, senha: String){
         self.auth.signIn(withEmail: email, password: senha) { result, error in
             if error != nil {
-                self.delegate?.failureLogin(error: "Usuario invalido")
+                self.delegate?.failureLogin(error: error?.localizedDescription ?? "")
             }else {
                 self.delegate?.successLogin()
             }

@@ -146,6 +146,7 @@ extension DetailScreen: ViewCode {
             self.descFilme.topAnchor.constraint(equalTo: self.starFilme.bottomAnchor,constant: 15),
             self.descFilme.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 15),
             self.descFilme.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -15),
+            self.descFilme.bottomAnchor.constraint(equalTo: self.scroolView.bottomAnchor)
         ])
     }
     

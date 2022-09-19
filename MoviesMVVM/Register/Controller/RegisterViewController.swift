@@ -11,11 +11,13 @@ class RegisterViewController: UIViewController {
     //MARK: - Propriedades
     var screen: RegisterScreen?
     var viewModel: RegisterViewModel?
+    private var alert: Alert?
     
     //MARK: - LifeCycle
     override func loadView() {
         self.screen = RegisterScreen()
         self.viewModel = RegisterViewModel(delegate: self)
+        self.alert = Alert(controller: self)
         self.view = self.screen
     }
 
@@ -53,12 +55,13 @@ extension RegisterViewController: RegisterScreenProtocol {
 //MARK: - RegisterViewModelDelegate
 extension RegisterViewController: RegisterViewModelProtocol {
     func succesRegister() {
-        self.navigationController?.popViewController(animated: true)
+        self.alert?.getAlert(titulo: "Succes", mensagem: "Usuario Cadastrado", compleion: {
+            self.navigationController?.popViewController(animated: true)
+        })
     }
     
-    func failureRegister(error: Error?) {
-        
+    func failureRegister(error: String) {
+        self.alert?.getAlert(titulo: "Error", mensagem: error)
     }
-    
     
 }

@@ -12,11 +12,13 @@ class LoginViewController: UIViewController {
     
     var screen: LoginScreen?
     var viewModel: LoginViewModel?
+    private var alert: Alert?
     
     //MARK: - LifeCycle
     override func loadView() {
         self.screen = LoginScreen()
         self.viewModel = LoginViewModel(delegate: self)
+        self.alert = Alert(controller: self)
         self.view = self.screen
     }
     
@@ -65,7 +67,7 @@ extension LoginViewController: LoginViewModelProtocol {
     }
     
     func failureLogin(error: String) {
-        print(error)
+        self.alert?.getAlert(titulo: "Error", mensagem: error)
     }
     
 }

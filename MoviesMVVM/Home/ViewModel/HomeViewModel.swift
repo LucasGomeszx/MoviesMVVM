@@ -34,20 +34,16 @@ class HomeViewModel {
     public func buscarFilmes() {
         service.buscarFilmes(url: self.montarUrl()) { result, failure in
             if failure != nil {
-                DispatchQueue.main.async {
-                    guard let error = failure else {
-                        return
-                    }
-                    self.delegate?.failureService(error: error.localizedDescription)
+                guard let error = failure else {
+                    return
                 }
+                self.delegate?.failureService(error: error.localizedDescription)
             }else {
-                DispatchQueue.main.async {
-                    if let filmes = result {
-                        self.listaFilmes = self.listaFilmes + filmes.results
-                        self.page = filmes.page + 1
-                        self.totalPage = filmes.totalPage
-                        self.delegate?.successService()
-                    }
+                if let filmes = result {
+                    self.listaFilmes = self.listaFilmes + filmes.results
+                    self.page = filmes.page + 1
+                    self.totalPage = filmes.totalPage
+                    self.delegate?.successService()
                 }
             }
         }

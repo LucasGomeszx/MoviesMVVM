@@ -10,7 +10,7 @@ import Firebase
 
 protocol RegisterViewModelProtocol: AnyObject{
     func succesRegister()
-    func failureRegister(error: Error?)
+    func failureRegister(error: String)
 }
 
 class RegisterViewModel {
@@ -27,7 +27,8 @@ class RegisterViewModel {
     public func cadastrarUsuario(email: String, senha: String){
         self.auth.createUser(withEmail: email, password: senha) { result, error in
             if error != nil {
-                self.delegate?.failureRegister(error: error)
+                
+                self.delegate?.failureRegister(error: error?.localizedDescription ?? "")
             }else {
                 self.delegate?.succesRegister()
             }
